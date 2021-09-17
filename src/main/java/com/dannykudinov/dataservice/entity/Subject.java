@@ -13,6 +13,10 @@ public class Subject {
     @Column(name = "name")
     private String subjName;
 
+    @OneToOne(mappedBy = "subjectId",
+            cascade = CascadeType.ALL)
+    private Teacher teacher;
+
     public Subject() {
     }
 
@@ -34,6 +38,14 @@ public class Subject {
 
     public void setSubjName(String subjName) {
         this.subjName = subjName;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
     @Override

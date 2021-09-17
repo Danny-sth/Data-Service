@@ -1,10 +1,11 @@
 package com.dannykudinov.dataservice.services;
 
-import java.util.List;
 import com.dannykudinov.dataservice.DAO.TeacherRepository;
 import com.dannykudinov.dataservice.entity.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TeacherService {
@@ -15,6 +16,12 @@ public class TeacherService {
     public List<Teacher> getAll() {
         List<Teacher> allTeachers = repository.findAll();
         return allTeachers;
+    }
+
+    public Teacher getById(int id) {
+        Teacher teacher = repository.findById(id)
+                .get();
+        return teacher;
     }
 
 }
