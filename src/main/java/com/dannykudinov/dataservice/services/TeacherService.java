@@ -24,4 +24,9 @@ public class TeacherService {
         return teacher;
     }
 
+    public Teacher save(Teacher teacher) {
+        repository.save(teacher);
+        return teacher;
+    }
+
 }

@@ -14,7 +14,8 @@ public interface TeacherRepository extends CrudRepository<Teacher, Integer> {
     public List<Teacher> findAll();
 
     @Override
-    default Optional<Teacher> findById(Integer integer) {
-        return Optional.empty();
-    }
+    public Optional<Teacher> findById(Integer integer);
+
+    @Override
+    Teacher save(Teacher teacher);
 }
