@@ -13,8 +13,9 @@ public class Subject {
     @Column(name = "name")
     private String name;
 
-    @OneToOne(mappedBy = "subjectId",
+    @OneToOne(mappedBy = "subject",
             cascade = CascadeType.ALL)
+    @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
     public Subject() {

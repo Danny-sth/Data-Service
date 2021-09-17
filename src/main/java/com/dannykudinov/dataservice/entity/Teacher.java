@@ -22,7 +22,7 @@ public class Teacher {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "subject_id")
-    private Subject subjectId;
+    private Subject subject;
 
     public Teacher() {
     }
@@ -31,7 +31,7 @@ public class Teacher {
         this.name = name;
         this.surname = surname;
         this.salary = salary;
-        this.subjectId = subjectId;
+        this.subject = subjectId;
     }
 
     public int getId() {
@@ -66,12 +66,12 @@ public class Teacher {
         this.salary = salary;
     }
 
-    public Subject getSubjectId() {
-        return subjectId;
+    public Subject getSubject() {
+        return subject;
     }
 
-    public void setSubjectId(Subject subjectId) {
-        this.subjectId = subjectId;
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 
     @Override
@@ -81,7 +81,7 @@ public class Teacher {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", salary=" + salary +
-                ", subjectId=" + subjectId +
+                ", subject=" + subject +
                 '}';
     }
 }
