@@ -1,6 +1,6 @@
 package com.dannykudinov.dataservice.services;
 
-import com.dannykudinov.dataservice.DAO.TeacherRepository;
+import com.dannykudinov.dataservice.DAO.TeacherRepo;
 import com.dannykudinov.dataservice.entity.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import java.util.List;
 public class TeacherService {
 
     @Autowired
-    TeacherRepository repository;
+    TeacherRepo repository;
 
     public List<Teacher> getAll() {
         List<Teacher> allTeachers = repository.findAll();

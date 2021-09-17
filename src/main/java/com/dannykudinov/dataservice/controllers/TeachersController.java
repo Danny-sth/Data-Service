@@ -17,20 +17,21 @@ public class TeachersController {
 
     @GetMapping("/teachers")
     public List<Teacher> getAllTeachers() {
-        List<Teacher> teacherList = teacherService.getAll();
-        return teacherList;
+        return teacherService
+                .getAll();
+
     }
 
     @GetMapping("/{id}")
     public Teacher getTeacherById(@PathVariable int id) {
-        Teacher teacher = teacherService.getById(id);
-        return teacher;
+        return teacherService
+                .getById(id);
     }
 
     @PostMapping("/addTeacher")
     public Teacher addTeacher(@RequestBody Teacher teacher) {
-        teacherService.save(teacher);
-        return teacher;
+        return teacherService
+                .save(teacher);
     }
 
 }

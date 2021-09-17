@@ -11,7 +11,7 @@ public class Subject {
     private int id;
 
     @Column(name = "name")
-    private String subjName;
+    private String name;
 
     @OneToOne(mappedBy = "subjectId",
             cascade = CascadeType.ALL)
@@ -20,8 +20,8 @@ public class Subject {
     public Subject() {
     }
 
-    public Subject(String subjName) {
-        this.subjName = subjName;
+    public Subject(String name) {
+        this.name = name;
     }
 
     public int getId() {
@@ -32,12 +32,12 @@ public class Subject {
         this.id = id;
     }
 
-    public String getSubjName() {
-        return subjName;
+    public String getName() {
+        return name;
     }
 
-    public void setSubjName(String subjName) {
-        this.subjName = subjName;
+    public void setName(String subjName) {
+        this.name = subjName;
     }
 
     public Teacher getTeacher() {
@@ -52,7 +52,7 @@ public class Subject {
     public String toString() {
         return "Subject{" +
                 "id=" + id +
-                ", subjName='" + subjName + '\'' +
+                ", subjName='" + name + '\'' +
                 '}';
     }
 }

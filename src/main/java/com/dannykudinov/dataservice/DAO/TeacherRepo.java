@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface TeacherRepository extends CrudRepository<Teacher, Integer> {
+public interface TeacherRepo extends CrudRepository<Teacher, Integer> {
 
     @Override
     public List<Teacher> findAll();
