@@ -1,9 +1,7 @@
 package com.dannykudinov.dataservice.controllers;
 
 
-import com.dannykudinov.dataservice.entity.Subject;
 import com.dannykudinov.dataservice.entity.Teacher;
-import com.dannykudinov.dataservice.services.SubjectService;
 import com.dannykudinov.dataservice.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +15,6 @@ public class TeachersController {
     @Autowired
     TeacherService teacherService;
 
-    @Autowired
-    SubjectService subjectService;
-
     @GetMapping("/teachers")
     public List<Teacher> getAllTeachers() {
         return teacherService
@@ -27,7 +22,7 @@ public class TeachersController {
 
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/teachers/{id}")
     public Teacher getTeacherById(@PathVariable int id) {
         return teacherService
                 .getById(id);
