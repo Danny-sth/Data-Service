@@ -1,6 +1,7 @@
 package com.dannykudinov.dataservice.controllers;
 
 import com.dannykudinov.dataservice.entity.Subject;
+import com.dannykudinov.dataservice.entity.Teacher;
 import com.dannykudinov.dataservice.services.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,12 @@ public class SubjectController {
     public Subject addSubject(@RequestBody Subject subject) {
         return subjectService
                 .addSubject(subject);
+    }
+
+    @PutMapping("/updateSubject/{id}")
+    public Subject updateTeacher(@PathVariable int id,
+                              @RequestBody Subject subject) {
+       return subjectService.update(id, subject);
     }
 
 

@@ -8,11 +8,4 @@ import java.util.List;
 
 @Repository
 public interface SubjectsRepo extends CrudRepository<Subject, Integer> {
-
-    public List<Subject> findAll();
-
-    public Subject findById(int id);
-
-    public Subject save(Subject subject);
-
 }

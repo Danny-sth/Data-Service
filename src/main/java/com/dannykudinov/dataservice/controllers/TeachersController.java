@@ -34,4 +34,12 @@ public class TeachersController {
                 .save(teacher);
     }
 
+    @PutMapping("/updateTeacher/{id}")
+    public Teacher updateTeacher(@PathVariable int id,
+                                 @RequestBody Teacher teacher) {
+        return teacherService
+                .update(id, teacher);
+    }
+
+
 }
