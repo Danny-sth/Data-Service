@@ -35,11 +35,6 @@ public class TeachersController {
 
     @PostMapping("/addTeacher")
     public Teacher addTeacher(@RequestBody Teacher teacher) {
-        Subject subject = subjectService.getSubjectById(teacher.getSubject().getId());
-//        System.out.println("SUBJECT" + " " + subject);
-        teacher.setSubject(subject);
-        subject.setTeacher(teacher);
-        System.out.println("TEACHER" + " " + teacher);
         return teacherService
                 .save(teacher);
     }

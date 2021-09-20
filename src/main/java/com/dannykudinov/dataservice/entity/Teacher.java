@@ -1,5 +1,9 @@
 package com.dannykudinov.dataservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,6 +26,7 @@ public class Teacher {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "subject_id")
+    @JsonIgnoreProperties("teacher")
     private Subject subject;
 
     public Teacher() {
