@@ -1,6 +1,5 @@
 package com.dannykudinov.dataservice.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -16,8 +15,12 @@ public class Subject {
     @Column(name = "name")
     private String name;
 
-    @OneToOne(mappedBy = "subject",
-            cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "teach_in_sub",
+            joinColumns = @JoinColumn(
+                    name = "subject_id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "teacher_id"))
     @JsonIgnoreProperties("subject")
     private Teacher teacher;
 

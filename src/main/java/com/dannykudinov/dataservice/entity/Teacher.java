@@ -25,11 +25,9 @@ public class Teacher {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinTable(name = "teach_in_sub",
             joinColumns = @JoinColumn(
-                    name = "teacher_id",
-                    referencedColumnName = "id"
-            ), inverseJoinColumns = @JoinColumn(
-            name = "subject_id",
-            referencedColumnName = "id"))
+                    name = "teacher_id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "subject_id"))
     @JsonIgnoreProperties("teacher")
     private Subject subject;
 
