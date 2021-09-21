@@ -38,8 +38,11 @@ public class TeacherService {
         teacherInDB.setSurname(teacher.getSurname());
         teacherInDB.setSalary(teacher.getSalary());
         teacherInDB.getSubject().setName(teacher.getSubject().getName());
-
         repository.save(teacherInDB);
         return teacherInDB;
+    }
+
+    public void delete(int id) {
+        repository.deleteById(id);
     }
 }

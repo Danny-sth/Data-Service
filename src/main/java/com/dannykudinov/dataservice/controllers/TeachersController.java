@@ -41,5 +41,9 @@ public class TeachersController {
                 .update(id, teacher);
     }
 
+    @DeleteMapping("/deleteTeacher/{id}")
+    public void deleteTeacher(@PathVariable int id) {
+        teacherService.delete(id);
+    }
 
 }

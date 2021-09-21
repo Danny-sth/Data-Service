@@ -47,4 +47,8 @@ public class SubjectService {
         return subjectInDB;
     }
 
+
+    public void delete(int id) {
+        subjectsRepo.deleteById(id);
+    }
 }
