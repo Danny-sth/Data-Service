@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "grades")
-public class Grades {
+public class Grade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,10 +21,10 @@ public class Grades {
     @Column(name = "grade")
     private int grade;
 
-    public Grades() {
+    public Grade() {
     }
 
-    public Grades(Student student, Subject subject, int grade) {
+    public Grade(Student student, Subject subject, int grade) {
         this.student = student;
         this.subject = subject;
         this.grade = grade;
