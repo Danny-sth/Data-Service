@@ -41,6 +41,7 @@ public class GradeService {
         }
         Optional<Subject> subjectInDB =
                 subjectsRepo.findById(subjectId);
+        log.debug("Fetching subject from DB " + subjectInDB);
         if (subjectInDB.isPresent()) {
             Subject subject = subjectInDB.get();
             grade.setSubject(subject);
