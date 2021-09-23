@@ -14,8 +14,8 @@ public class GradeController {
 
     @PostMapping("grades")
     public Grade addGrade(
-            @RequestParam(name = "studentId") int studentId,
-            @RequestParam(name = "subjectId") int subjectId,
+            @RequestParam(name = "studentId") final int studentId,
+            @RequestParam(name = "subjectId") final int subjectId,
             @RequestBody Grade grade) {
         gradeService.add(studentId,
                 subjectId, grade);
@@ -24,8 +24,8 @@ public class GradeController {
 
     @PutMapping("grades")
     public Grade updateGrade(
-            @RequestParam(name = "studentId") int studentId,
-            @RequestParam(name = "subjectId") int subjectId,
+            @RequestParam(name = "studentId") final int studentId,
+            @RequestParam(name = "subjectId") final int subjectId,
             @RequestParam(name = "gradeId") int gradeID,
             @RequestBody Grade grade) {
         gradeService.update(studentId,

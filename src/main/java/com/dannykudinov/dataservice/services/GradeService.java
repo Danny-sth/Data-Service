@@ -24,7 +24,7 @@ public class GradeService {
     SubjectsRepo subjectsRepo;
 
 
-    public Grade add(int studentId, int subjectId,
+    public Grade add(final int studentId, final int subjectId,
                      Grade grade) {
         Optional<Student> studentInDB =
                 studentsRepo.findById(studentId);
@@ -42,8 +42,8 @@ public class GradeService {
         return grade;
     }
 
-    public Grade update(int studentId, int subjectId,
-                        int gradeID,
+    public Grade update(final int studentId, final int subjectId,
+                        final int gradeID,
                         Grade grade) {
         Optional<Student> studentInDB =
                 studentsRepo.findById(studentId);

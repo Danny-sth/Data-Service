@@ -18,7 +18,7 @@ public class TeacherService {
         return (List<Teacher>) repository.findAll();
     }
 
-    public Teacher getById(int id) {
+    public Teacher getById(final int id) {
         Teacher teacher = null;
         Optional<Teacher> optional = repository.findById(id);
         if (optional.isPresent()) {
@@ -32,7 +32,7 @@ public class TeacherService {
                 .save(teacher);
     }
 
-    public Teacher update(int id, Teacher teacher) {
+    public Teacher update(final int id, Teacher teacher) {
         Teacher teacherInDB = getById(id);
         teacherInDB.setName(teacher.getName());
         teacherInDB.setSurname(teacher.getSurname());
@@ -42,7 +42,7 @@ public class TeacherService {
         return teacherInDB;
     }
 
-    public void delete(int id) {
+    public void delete(final int id) {
         repository.deleteById(id);
     }
 }

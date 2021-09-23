@@ -23,7 +23,7 @@ public class TeachersController {
     }
 
     @GetMapping("/teachers/{id}")
-    public Teacher getTeacherById(@PathVariable int id) {
+    public Teacher getTeacherById(@PathVariable final int id) {
         return teacherService
                 .getById(id);
     }
@@ -35,14 +35,14 @@ public class TeachersController {
     }
 
     @PutMapping("/updateTeacher/{id}")
-    public Teacher updateTeacher(@PathVariable int id,
+    public Teacher updateTeacher(@PathVariable final int id,
                                  @RequestBody Teacher teacher) {
         return teacherService
                 .update(id, teacher);
     }
 
     @DeleteMapping("/deleteTeacher/{id}")
-    public void deleteTeacher(@PathVariable int id) {
+    public void deleteTeacher(@PathVariable final int id) {
         teacherService.delete(id);
     }
 

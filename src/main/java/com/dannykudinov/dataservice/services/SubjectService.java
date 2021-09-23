@@ -23,7 +23,7 @@ public class SubjectService {
                 .findAll();
     }
 
-    public Subject getSubjectById(int id) {
+    public Subject getSubjectById(final int id) {
         Subject subject = null;
         Optional<Subject> optional = subjectsRepo.findById(id);
         if (optional.isPresent()) {
@@ -37,7 +37,7 @@ public class SubjectService {
                 .save(subject);
     }
 
-    public Subject update(int id, Subject subject) {
+    public Subject update(final int id, Subject subject) {
         Subject subjectInDB = getSubjectById(id);
         subjectInDB.setName(subject.getName());
         subjectInDB.getTeacher().setName(subject.getTeacher().getName());
@@ -48,7 +48,7 @@ public class SubjectService {
     }
 
 
-    public void delete(int id) {
+    public void delete(final int id) {
         subjectsRepo.deleteById(id);
     }
 }
