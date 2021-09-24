@@ -42,8 +42,8 @@ public class SubjectController {
     }
 
     @DeleteMapping("/deleteSubject/{id}")
-    public void deleteSubject(@PathVariable final int id) {
-        subjectService.delete(id);
+    public String deleteSubject(@PathVariable final int id) {
+        String message = subjectService.delete(id);
+    return message;
     }
-
 }

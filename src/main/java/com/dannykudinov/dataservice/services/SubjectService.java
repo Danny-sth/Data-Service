@@ -28,6 +28,7 @@ public class SubjectService {
     }
 
     public Subject getSubjectById(final int id) {
+        log.debug("Method getSubjectById start");
         Subject subject = null;
         Optional<Subject> optional = subjectsRepo.findById(id);
         try {
@@ -38,29 +39,48 @@ public class SubjectService {
                 throw new NullPointerException();
             }
         } catch (NullPointerException e) {
-            log.debug("No such object exists", e);
+            log.debug("No such object exists");
         }
+        log.debug("Method getSubjectById finished");
         return subject;
     }
 
 
     public Subject addSubject(Subject subject) {
+        log.info("Save subject {} to database", subject);
         return subjectsRepo
                 .save(subject);
     }
 
     public Subject update(final int id, Subject subject) {
+        log.debug("Method update start");
         Subject subjectInDB = getSubjectById(id);
+        log.debug("Fetching subject {} from DB", subjectInDB);
         subjectInDB.setName(subject.getName());
         subjectInDB.getTeacher().setName(subject.getTeacher().getName());
         subjectInDB.getTeacher().setSurname(subject.getTeacher().getSurname());
         subjectInDB.getTeacher().setSalary(subject.getTeacher().getSalary());
         subjectsRepo.save(subjectInDB);
+        log.debug("Save updated subject {} in DB", subjectInDB);
+        log.debug("Method update finished");
         return subjectInDB;
     }
 
 
-    public void delete(final int id) {
-        subjectsRepo.deleteById(id);
+    public String delete(final int id) {
+        log.debug("Method delete start");
+        String message = null;
+        try {
+            if (subjectsRepo.findById(id).isPresent()) {
+                subjectsRepo.deleteById(id);
+                message = "Subject is deleted";
+            } else throw
+                    new NullPointerException();
+        } catch (NullPointerException e) {
+            message = "No such subject in database";
+            log.debug(message);
+        }
+        log.debug("Method delete finished");
+        return message;
     }
 }
