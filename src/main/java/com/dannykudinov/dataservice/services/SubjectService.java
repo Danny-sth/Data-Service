@@ -3,6 +3,8 @@ package com.dannykudinov.dataservice.services;
 import com.dannykudinov.dataservice.DAO.SubjectsRepo;
 import com.dannykudinov.dataservice.DAO.TeacherRepo;
 import com.dannykudinov.dataservice.entity.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,8 @@ import java.util.Optional;
 
 @Service
 public class SubjectService {
+
+    Logger log = LoggerFactory.getLogger(SubjectService.class);
 
     @Autowired
     SubjectsRepo subjectsRepo;
@@ -26,11 +30,19 @@ public class SubjectService {
     public Subject getSubjectById(final int id) {
         Subject subject = null;
         Optional<Subject> optional = subjectsRepo.findById(id);
-        if (optional.isPresent()) {
-            subject = optional.get();
+        try {
+            if (optional.isPresent()) {
+                subject = optional.get();
+                log.debug("Fetching subject by id {}", subject);
+            } else {
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException e) {
+            log.debug("No such object exists", e);
         }
         return subject;
     }
+
 
     public Subject addSubject(Subject subject) {
         return subjectsRepo

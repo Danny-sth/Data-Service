@@ -12,7 +12,7 @@ public class GradeController {
     @Autowired
     GradeService gradeService;
 
-    @PostMapping("grades")
+    @PostMapping(path = "grades")
     public Grade addGrade(
             @RequestParam(name = "studentId") final int studentId,
             @RequestParam(name = "subjectId") final int subjectId,
@@ -22,7 +22,7 @@ public class GradeController {
         return grade;
     }
 
-    @PutMapping("grades")
+    @PutMapping(path = "grades")
     public Grade updateGrade(
             @RequestParam(name = "studentId") final int studentId,
             @RequestParam(name = "subjectId") final int subjectId,

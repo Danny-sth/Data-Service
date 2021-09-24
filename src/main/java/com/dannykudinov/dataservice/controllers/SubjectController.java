@@ -2,6 +2,8 @@ package com.dannykudinov.dataservice.controllers;
 
 import com.dannykudinov.dataservice.entity.Subject;
 import com.dannykudinov.dataservice.services.SubjectService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

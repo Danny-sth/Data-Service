@@ -3,7 +3,6 @@ package com.dannykudinov.dataservice.services;
 import com.dannykudinov.dataservice.DAO.GradeRepo;
 import com.dannykudinov.dataservice.DAO.StudentsRepo;
 import com.dannykudinov.dataservice.DAO.SubjectsRepo;
-import com.dannykudinov.dataservice.DataServiceApplication;
 import com.dannykudinov.dataservice.entity.Grade;
 import com.dannykudinov.dataservice.entity.Student;
 import com.dannykudinov.dataservice.entity.Subject;
@@ -34,19 +33,20 @@ public class GradeService {
                      Grade grade) {
         Optional<Student> studentInDB =
                 studentsRepo.findById(studentId);
-        log.debug("Fetching student from DB " + studentInDB);
+        log.debug("Fetching STUDENT from DB - {}", studentInDB);
         if (studentInDB.isPresent()) {
             Student student = studentInDB.get();
             grade.setStudent(student);
         }
         Optional<Subject> subjectInDB =
                 subjectsRepo.findById(subjectId);
-        log.debug("Fetching subject from DB " + subjectInDB);
+        log.debug("Fetching subject from DB - {}", subjectInDB);
         if (subjectInDB.isPresent()) {
             Subject subject = subjectInDB.get();
             grade.setSubject(subject);
         }
         gradeRepo.save(grade);
+        log.debug("Save object GRADE to DB - {}" + grade);
         return grade;
     }
 
@@ -55,12 +55,14 @@ public class GradeService {
                         Grade grade) {
         Optional<Student> studentInDB =
                 studentsRepo.findById(studentId);
+        log.debug("Fetching STUDENT from DB - {}", studentInDB);
         if (studentInDB.isPresent()) {
             Student student = studentInDB.get();
             grade.setStudent(student);
         }
         Optional<Subject> subjectInDB =
                 subjectsRepo.findById(subjectId);
+        log.debug("Fetching subject from DB - {}", subjectInDB);
         if (subjectInDB.isPresent()) {
             Subject subject = subjectInDB.get();
             grade.setSubject(subject);
@@ -70,6 +72,7 @@ public class GradeService {
         grade.setId(gradeInDB.get().getId());
         System.out.println(grade);
         gradeRepo.save(grade);
+        log.debug("Save updating object GRADE to DB - {}" + grade);
         return grade;
     }
 }
