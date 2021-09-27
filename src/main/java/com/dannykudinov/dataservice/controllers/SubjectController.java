@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// В классе описаны все необходимые api-endpoints, класс был написан до подключения spring-data-rest
 @RestController
 @RequestMapping("/api")
 public class SubjectController {
@@ -42,6 +43,6 @@ public class SubjectController {
     @DeleteMapping("/deleteSubject/{id}")
     public String deleteSubject(@PathVariable final int id) {
         String message = subjectService.deleteSubject(id);
-    return message;
+        return message;
     }
 }

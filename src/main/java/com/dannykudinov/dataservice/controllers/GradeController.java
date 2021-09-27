@@ -5,6 +5,7 @@ import com.dannykudinov.dataservice.services.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+// В классы описаны только POST и PUT методы, остальные сгенерированы spring-data-rest
 @RestController
 @RequestMapping("/")
 public class GradeController {

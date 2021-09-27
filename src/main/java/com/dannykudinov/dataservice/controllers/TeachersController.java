@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// В классе описаны все необходимые api-endpoints, класс был написан до подключения spring-data-rest
 @RestController
 @RequestMapping("/api")
 public class TeachersController {

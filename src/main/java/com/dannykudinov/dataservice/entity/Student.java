@@ -2,6 +2,7 @@ package com.dannykudinov.dataservice.entity;
 
 import javax.persistence.*;
 
+// Все endpoints, необходимые для манипуляций с сушностью Student сгенерированы spring-data-rest
 @Entity
 @Table(name = "students")
 public class Student {
