@@ -32,19 +32,31 @@ public class GradeService {
     public Grade add(final int studentId, final int subjectId,
                      Grade grade) {
         log.debug("Method add start");
-        Optional<Student> studentInDB =
-                studentsRepo.findById(studentId);
-        log.debug("Fetching STUDENT from DB - {}", studentInDB);
-        if (studentInDB.isPresent()) {
-            Student student = studentInDB.get();
-            grade.setStudent(student);
+        try {
+            Optional<Student> studentInDB =
+                    studentsRepo.findById(studentId);
+            if (studentInDB.isPresent()) {
+                Student student = studentInDB.get();
+                log.debug("Fetching student from DB - {}", studentInDB);
+                grade.setStudent(student);
+            } else {
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException e) {
+            log.debug("No such student exists");
         }
-        Optional<Subject> subjectInDB =
-                subjectsRepo.findById(subjectId);
-        log.debug("Fetching subject from DB - {}", subjectInDB);
-        if (subjectInDB.isPresent()) {
-            Subject subject = subjectInDB.get();
-            grade.setSubject(subject);
+        try {
+            Optional<Subject> subjectInDB =
+                    subjectsRepo.findById(subjectId);
+            log.debug("Fetching subject from DB - {}", subjectInDB);
+            if (subjectInDB.isPresent()) {
+                Subject subject = subjectInDB.get();
+                grade.setSubject(subject);
+            } else {
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException e) {
+            log.debug("No such subject exists");
         }
         gradeRepo.save(grade);
         log.debug("Save object GRADE to DB - {}" + grade);

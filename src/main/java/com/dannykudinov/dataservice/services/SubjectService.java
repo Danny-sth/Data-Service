@@ -30,8 +30,8 @@ public class SubjectService {
     public Subject getSubjectById(final int id) {
         log.debug("Method getSubjectById start");
         Subject subject = null;
-        Optional<Subject> optional = subjectsRepo.findById(id);
         try {
+            Optional<Subject> optional = subjectsRepo.findById(id);
             if (optional.isPresent()) {
                 subject = optional.get();
                 log.debug("Fetching subject by id {}", subject);
