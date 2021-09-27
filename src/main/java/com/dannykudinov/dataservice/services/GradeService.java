@@ -32,30 +32,22 @@ public class GradeService {
     public Grade addGrade(final int studentId, final int subjectId,
                           Grade grade) {
         log.debug("Method addGrade start");
-        try {
-            Optional<Student> studentInDB =
-                    studentsRepo.findById(studentId);
-            if (studentInDB.isPresent()) {
-                Student student = studentInDB.get();
-                log.debug("Fetching student from DB - {}", studentInDB);
-                grade.setStudent(student);
-            } else {
-                throw new NullPointerException();
-            }
-        } catch (NullPointerException e) {
+        Optional<Student> studentFromDB =
+                studentsRepo.findById(studentId);
+        if (studentFromDB.isPresent()) {
+            Student student = studentFromDB.get();
+            log.debug("Fetching student from DB - {}", studentFromDB);
+            grade.setStudent(student);
+        } else {
             log.debug("No such student exists");
         }
-        try {
-            Optional<Subject> subjectInDB =
-                    subjectsRepo.findById(subjectId);
-            log.debug("Fetching subject from DB - {}", subjectInDB);
-            if (subjectInDB.isPresent()) {
-                Subject subject = subjectInDB.get();
-                grade.setSubject(subject);
-            } else {
-                throw new NullPointerException();
-            }
-        } catch (NullPointerException e) {
+        Optional<Subject> subjectFromDB =
+                subjectsRepo.findById(subjectId);
+        log.debug("Fetching subject from DB - {}", subjectFromDB);
+        if (subjectFromDB.isPresent()) {
+            Subject subject = subjectFromDB.get();
+            grade.setSubject(subject);
+        } else {
             log.debug("No such subject exists");
         }
         gradeRepo.save(grade);
@@ -68,42 +60,32 @@ public class GradeService {
                              final int gradeID,
                              Grade grade) {
         log.debug("Method updateGrade start");
-        try {
-            Optional<Student> studentInDB =
-                    studentsRepo.findById(studentId);
-            log.debug("Fetching student from DB - {}", studentInDB);
-            if (studentInDB.isPresent()) {
-                Student student = studentInDB.get();
-                grade.setStudent(student);
-            } else {
-                throw new NullPointerException();
-            }
-        } catch (NullPointerException e) {
+        Optional<Student> studentFromDB =
+                studentsRepo.findById(studentId);
+        log.debug("Fetching student from DB - {}", studentFromDB);
+        if (studentFromDB.isPresent()) {
+            Student student = studentFromDB.get();
+            grade.setStudent(student);
+        } else {
             log.debug("No such student in database");
         }
-        Optional<Subject> subjectInDB =
+        Optional<Subject> subjectFromDB =
                 subjectsRepo.findById(subjectId);
-        log.debug("Fetching subject from DB - {}", subjectInDB);
-        try {
-            if (subjectInDB.isPresent()) {
-                Subject subject = subjectInDB.get();
-                grade.setSubject(subject);
-            } else {
-                throw new NullPointerException();
-            }
-        } catch (NullPointerException e) {
+        log.debug("Fetching subject from DB - {}", subjectFromDB);
+        if (subjectFromDB.isPresent()) {
+            Subject subject = subjectFromDB.get();
+            grade.setSubject(subject);
+        } else {
             log.debug("No such subject in database");
         }
-        try {
-            Optional<Grade> gradeInDB =
-                    gradeRepo.findById(gradeID);
-            if (gradeInDB.isPresent()) {
-                log.debug("Fetching grade from database");
-                grade.setId(gradeInDB.get().getId());
-                gradeRepo.save(grade);
-                log.debug("Save updating object GRADE to DB - {}", grade);
-            } else throw new NullPointerException();
-        } catch (NullPointerException e) {
+        Optional<Grade> gradeFromDB =
+                gradeRepo.findById(gradeID);
+        if (gradeFromDB.isPresent()) {
+            log.debug("Fetching grade from database");
+            grade.setId(gradeFromDB.get().getId());
+            gradeRepo.save(grade);
+            log.debug("Save updating object GRADE to DB - {}", grade);
+        } else {
             log.debug("No such grade in database");
         }
         log.debug("Method updateGrade finished");

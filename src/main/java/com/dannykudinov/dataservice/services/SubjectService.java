@@ -30,15 +30,11 @@ public class SubjectService {
     public Subject getSubjectById(final int id) {
         log.debug("Method getSubjectById start");
         Subject subject = null;
-        try {
-            Optional<Subject> optional = subjectsRepo.findById(id);
-            if (optional.isPresent()) {
-                subject = optional.get();
-                log.debug("Fetching subject by id {}", subject);
-            } else {
-                throw new NullPointerException();
-            }
-        } catch (NullPointerException e) {
+        Optional<Subject> optional = subjectsRepo.findById(id);
+        if (optional.isPresent()) {
+            subject = optional.get();
+            log.debug("Fetching subject by id {}", subject);
+        } else {
             log.debug("No such subject exists");
         }
         log.debug("Method getSubjectById finished");
@@ -54,29 +50,28 @@ public class SubjectService {
 
     public Subject updateSubject(final int id, Subject subject) {
         log.debug("Method updateSubject start");
-        Subject subjectInDB = getSubjectById(id);
-        log.debug("Fetching subject {} from DB", subjectInDB);
-        subjectInDB.setName(subject.getName());
-        subjectInDB.getTeacher().setName(subject.getTeacher().getName());
-        subjectInDB.getTeacher().setSurname(subject.getTeacher().getSurname());
-        subjectInDB.getTeacher().setSalary(subject.getTeacher().getSalary());
-        subjectsRepo.save(subjectInDB);
-        log.debug("Save updated subject {} in DB", subjectInDB);
+        Subject subjectFromDB = getSubjectById(id);
+        if (subjectFromDB != null) {
+            log.debug("Fetching subject {} from DB", subjectFromDB);
+            subjectFromDB.setName(subject.getName());
+            subjectFromDB.getTeacher().setName(subject.getTeacher().getName());
+            subjectFromDB.getTeacher().setSurname(subject.getTeacher().getSurname());
+            subjectFromDB.getTeacher().setSalary(subject.getTeacher().getSalary());
+            subjectsRepo.save(subjectFromDB);
+            log.debug("Save updated subject {} in DB", subjectFromDB);
+        }
         log.debug("Method updateSubject finished");
-        return subjectInDB;
+        return subjectFromDB;
     }
 
 
     public String deleteSubject(final int id) {
         log.debug("Method deleteSubject start");
-        String message = null;
-        try {
-            if (subjectsRepo.findById(id).isPresent()) {
-                subjectsRepo.deleteById(id);
-                message = "Subject is deleted";
-            } else throw
-                    new NullPointerException();
-        } catch (NullPointerException e) {
+        String message;
+        if (subjectsRepo.findById(id).isPresent()) {
+            subjectsRepo.deleteById(id);
+            message = "Subject is deleted";
+        } else {
             message = "No such subject in database";
             log.debug(message);
         }

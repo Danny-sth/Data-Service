@@ -23,20 +23,16 @@ public class TeacherService {
     }
 
     public Teacher getTeacherById(final int id) {
-        log.debug("Method getTeacherById start");
+        log.debug("Method getTeacherById is start");
         Teacher teacher = null;
-        try {
-            Optional<Teacher> teacherFromDB = teacherRepo.findById(id);
-            if (teacherFromDB.isPresent()) {
-                teacher = teacherFromDB.get();
-                log.debug("Fetching teacher by id {}", teacherFromDB);
-            } else {
-                throw new NullPointerException();
-            }
-        } catch (NullPointerException e) {
+        Optional<Teacher> teacherFromDB = teacherRepo.findById(id);
+        if (teacherFromDB.isPresent()) {
+            teacher = teacherFromDB.get();
+            log.debug("Fetching teacher by id {}", teacherFromDB);
+        } else {
             log.debug("No such teacher in database");
         }
-        log.debug("Method getTeacherById finished");
+        log.debug("Method getTeacherById is finished");
         return teacher;
     }
 
@@ -47,30 +43,28 @@ public class TeacherService {
     }
 
     public Teacher updateTeacher(final int id, Teacher teacher) {
-        log.debug("Method updateTeacher start");
-        Teacher teacherInDB = getTeacherById(id);
-        log.debug("Fetching teacher {} from DB", teacherInDB);
-        teacherInDB.setName(teacher.getName());
-        teacherInDB.setSurname(teacher.getSurname());
-        teacherInDB.setSalary(teacher.getSalary());
-        teacherInDB.getSubject().setName(teacher.getSubject().getName());
-        teacherRepo.save(teacherInDB);
-        log.debug("Save updated teacher {} in DB", teacherInDB);
-        log.debug("Method updateTeacher finished");
-        return teacherInDB;
+        log.debug("Method updateTeacher is start");
+        Teacher teacherFromDB = getTeacherById(id);
+        if (teacherFromDB != null) {
+            log.debug("Fetching teacher {} from DB", teacherFromDB);
+            teacherFromDB.setName(teacher.getName());
+            teacherFromDB.setSurname(teacher.getSurname());
+            teacherFromDB.setSalary(teacher.getSalary());
+            teacherFromDB.getSubject().setName(teacher.getSubject().getName());
+            teacherRepo.save(teacherFromDB);
+            log.debug("Save updated teacher {} in DB", teacherFromDB);
+        }
+        log.debug("Method updateTeacher is finished");
+        return teacherFromDB;
     }
 
     public String deleteTeacher(final int id) {
         log.debug("Method deleteTeacher start");
-        String message = null;
-        try {
-            if (teacherRepo.findById(id).isPresent()) {
-                teacherRepo.deleteById(id);
-                message = "Teacher is deleted";
-            } else {
-                throw new NullPointerException();
-            }
-        } catch (NullPointerException e) {
+        String message;
+        if (teacherRepo.findById(id).isPresent()) {
+            teacherRepo.deleteById(id);
+            message = "Teacher is deleted";
+        } else {
             message = "No such teacher in database";
             log.debug(message);
         }
