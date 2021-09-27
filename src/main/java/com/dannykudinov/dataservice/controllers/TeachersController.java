@@ -31,7 +31,7 @@ public class TeachersController {
     @PostMapping("/addTeacher")
     public Teacher addTeacher(@RequestBody Teacher teacher) {
         return teacherService
-                .save(teacher);
+                .saveTeacher(teacher);
     }
 
     @PutMapping("/updateTeacher/{id}")
@@ -43,7 +43,7 @@ public class TeachersController {
 
     @DeleteMapping("/deleteTeacher/{id}")
     public void deleteTeacher(@PathVariable final int id) {
-        teacherService.delete(id);
+        teacherService.deleteTeacher(id);
     }
 
 }

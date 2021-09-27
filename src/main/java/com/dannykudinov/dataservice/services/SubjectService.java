@@ -39,7 +39,7 @@ public class SubjectService {
                 throw new NullPointerException();
             }
         } catch (NullPointerException e) {
-            log.debug("No such object exists");
+            log.debug("No such subject exists");
         }
         log.debug("Method getSubjectById finished");
         return subject;
