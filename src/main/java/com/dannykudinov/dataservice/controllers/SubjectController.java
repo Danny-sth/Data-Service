@@ -2,8 +2,6 @@ package com.dannykudinov.dataservice.controllers;
 
 import com.dannykudinov.dataservice.entity.Subject;
 import com.dannykudinov.dataservice.services.SubjectService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,12 +36,12 @@ public class SubjectController {
     @PutMapping("/updateSubject/{id}")
     public Subject updateTeacher(@PathVariable final int id,
                                  @RequestBody Subject subject) {
-        return subjectService.update(id, subject);
+        return subjectService.updateSubject(id, subject);
     }
 
     @DeleteMapping("/deleteSubject/{id}")
     public String deleteSubject(@PathVariable final int id) {
-        String message = subjectService.delete(id);
+        String message = subjectService.deleteSubject(id);
     return message;
     }
 }

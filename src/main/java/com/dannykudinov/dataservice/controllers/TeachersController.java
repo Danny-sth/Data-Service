@@ -25,7 +25,7 @@ public class TeachersController {
     @GetMapping("/teachers/{id}")
     public Teacher getTeacherById(@PathVariable final int id) {
         return teacherService
-                .getById(id);
+                .getTeacherById(id);
     }
 
     @PostMapping("/addTeacher")
@@ -38,7 +38,7 @@ public class TeachersController {
     public Teacher updateTeacher(@PathVariable final int id,
                                  @RequestBody Teacher teacher) {
         return teacherService
-                .update(id, teacher);
+                .updateTeacher(id, teacher);
     }
 
     @DeleteMapping("/deleteTeacher/{id}")

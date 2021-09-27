@@ -52,8 +52,8 @@ public class SubjectService {
                 .save(subject);
     }
 
-    public Subject update(final int id, Subject subject) {
-        log.debug("Method update start");
+    public Subject updateSubject(final int id, Subject subject) {
+        log.debug("Method updateSubject start");
         Subject subjectInDB = getSubjectById(id);
         log.debug("Fetching subject {} from DB", subjectInDB);
         subjectInDB.setName(subject.getName());
@@ -62,13 +62,13 @@ public class SubjectService {
         subjectInDB.getTeacher().setSalary(subject.getTeacher().getSalary());
         subjectsRepo.save(subjectInDB);
         log.debug("Save updated subject {} in DB", subjectInDB);
-        log.debug("Method update finished");
+        log.debug("Method updateSubject finished");
         return subjectInDB;
     }
 
 
-    public String delete(final int id) {
-        log.debug("Method delete start");
+    public String deleteSubject(final int id) {
+        log.debug("Method deleteSubject start");
         String message = null;
         try {
             if (subjectsRepo.findById(id).isPresent()) {
@@ -80,7 +80,7 @@ public class SubjectService {
             message = "No such subject in database";
             log.debug(message);
         }
-        log.debug("Method delete finished");
+        log.debug("Method deleteSubject finished");
         return message;
     }
 }

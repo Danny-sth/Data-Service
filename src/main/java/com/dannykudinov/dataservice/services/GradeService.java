@@ -29,9 +29,9 @@ public class GradeService {
     SubjectsRepo subjectsRepo;
 
 
-    public Grade add(final int studentId, final int subjectId,
-                     Grade grade) {
-        log.debug("Method add start");
+    public Grade addGrade(final int studentId, final int subjectId,
+                          Grade grade) {
+        log.debug("Method addGrade start");
         try {
             Optional<Student> studentInDB =
                     studentsRepo.findById(studentId);
@@ -59,19 +59,19 @@ public class GradeService {
             log.debug("No such subject exists");
         }
         gradeRepo.save(grade);
-        log.debug("Save object GRADE to DB - {}" + grade);
-        log.debug("Method add finished");
+        log.debug("Save grade to DB - {}", grade);
+        log.debug("Method addGrade finished");
         return grade;
     }
 
-    public Grade update(final int studentId, final int subjectId,
-                        final int gradeID,
-                        Grade grade) {
-        log.debug("Method update start");
+    public Grade updateGrade(final int studentId, final int subjectId,
+                             final int gradeID,
+                             Grade grade) {
+        log.debug("Method updateGrade start");
         try {
             Optional<Student> studentInDB =
                     studentsRepo.findById(studentId);
-            log.debug("Fetching STUDENT from DB - {}", studentInDB);
+            log.debug("Fetching student from DB - {}", studentInDB);
             if (studentInDB.isPresent()) {
                 Student student = studentInDB.get();
                 grade.setStudent(student);
@@ -101,12 +101,12 @@ public class GradeService {
                 log.debug("Fetching grade from database");
                 grade.setId(gradeInDB.get().getId());
                 gradeRepo.save(grade);
-                log.debug("Save updating object GRADE to DB - {}" + grade);
+                log.debug("Save updating object GRADE to DB - {}", grade);
             } else throw new NullPointerException();
         } catch (NullPointerException e) {
             log.debug("No such grade in database");
         }
-        log.debug("Method update finished");
+        log.debug("Method updateGrade finished");
         return grade;
     }
 }

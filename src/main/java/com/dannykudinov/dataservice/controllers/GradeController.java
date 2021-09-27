@@ -17,7 +17,7 @@ public class GradeController {
             @RequestParam(name = "studentId") final int studentId,
             @RequestParam(name = "subjectId") final int subjectId,
             @RequestBody Grade grade) {
-        gradeService.add(studentId,
+        gradeService.addGrade(studentId,
                 subjectId, grade);
         return grade;
     }
@@ -28,7 +28,7 @@ public class GradeController {
             @RequestParam(name = "subjectId") final int subjectId,
             @RequestParam(name = "gradeId") int gradeID,
             @RequestBody Grade grade) {
-        gradeService.update(studentId,
+        gradeService.updateGrade(studentId,
                 subjectId, gradeID, grade);
         return grade;
     }

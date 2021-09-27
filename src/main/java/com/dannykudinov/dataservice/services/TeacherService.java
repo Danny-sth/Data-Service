@@ -16,17 +16,17 @@ public class TeacherService {
     Logger log = LoggerFactory.getLogger(TeacherService.class);
 
     @Autowired
-    TeacherRepo repository;
+    TeacherRepo teacherRepo;
 
-    public List<Teacher> getAll() {
-        return (List<Teacher>) repository.findAll();
+    public List<Teacher> getAllTeachers() {
+        return (List<Teacher>) teacherRepo.findAll();
     }
 
-    public Teacher getById(final int id) {
-        log.debug("Method getById start");
+    public Teacher getTeacherById(final int id) {
+        log.debug("Method getTeacherById start");
         Teacher teacher = null;
         try {
-            Optional<Teacher> teacherFromDB = repository.findById(id);
+            Optional<Teacher> teacherFromDB = teacherRepo.findById(id);
             if (teacherFromDB.isPresent()) {
                 teacher = teacherFromDB.get();
                 log.debug("Fetching teacher by id {}", teacherFromDB);
@@ -36,26 +36,27 @@ public class TeacherService {
         } catch (NullPointerException e) {
             log.debug("No such teacher in database");
         }
-        log.debug("Method getById finished");
+        log.debug("Method getTeacherById finished");
         return teacher;
     }
 
     public Teacher saveTeacher(Teacher teacher) {
         log.info("Save teacher {} to database", teacher);
-        return repository
+        return teacherRepo
                 .save(teacher);
     }
 
-    public Teacher update(final int id, Teacher teacher) {
-        log.debug("Method update start");
-        Teacher teacherInDB = getById(id);
+    public Teacher updateTeacher(final int id, Teacher teacher) {
+        log.debug("Method updateTeacher start");
+        Teacher teacherInDB = getTeacherById(id);
         log.debug("Fetching teacher {} from DB", teacherInDB);
         teacherInDB.setName(teacher.getName());
         teacherInDB.setSurname(teacher.getSurname());
         teacherInDB.setSalary(teacher.getSalary());
         teacherInDB.getSubject().setName(teacher.getSubject().getName());
-        repository.save(teacherInDB);
+        teacherRepo.save(teacherInDB);
         log.debug("Save updated teacher {} in DB", teacherInDB);
+        log.debug("Method updateTeacher finished");
         return teacherInDB;
     }
 
@@ -63,8 +64,8 @@ public class TeacherService {
         log.debug("Method deleteTeacher start");
         String message = null;
         try {
-            if (repository.findById(id).isPresent()) {
-                repository.deleteById(id);
+            if (teacherRepo.findById(id).isPresent()) {
+                teacherRepo.deleteById(id);
                 message = "Teacher is deleted";
             } else {
                 throw new NullPointerException();
