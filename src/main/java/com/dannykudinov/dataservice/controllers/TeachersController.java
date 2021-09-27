@@ -18,7 +18,7 @@ public class TeachersController {
     @GetMapping("/teachers")
     public List<Teacher> getAllTeachers() {
         return teacherService
-                .getAll();
+                .getAllTeachers();
 
     }
 
